@@ -1,0 +1,68 @@
+﻿@page "/"
+
+<header>
+    <nav><h2 id="nomeprojeto">Projeto #01</h2></nav>
+</header>
+
+<table class="table">
+<thead>
+    <tr>
+        <th>Data</th>
+        <th>Descricao</th>
+        <th>Concluidas</th>
+    </tr>
+</thead>
+<tbody>
+        @foreach (var item in tarefas)
+        {
+     <tr>
+        <td>@item.DataCriacao</td>
+        <td>@item.Descricao</td>
+        <td>@item.Concluida</td>
+    </tr> 
+        }
+
+</tbody>
+</table>
+
+@if (tarefas != null)
+{
+    <div class="form-group">
+        <label>Tarefa</label>
+        <input type="Text" placeholder="Informe a tarefa" @bind="NovaTarefa" />
+        <button class="btn btn-primary" @onclick="AdicionarNovaTarefa"> Registrar Tarefa</button>
+
+    </div>
+}
+
+
+@code{
+
+
+    public class Tarefa {
+
+        public Guid ID { get; set; }
+        public string Descricao { get; set; }   
+        public bool Concluida { get; set; }
+        public DateTime DataCriacao { get; set; }
+
+    }
+
+    private string NovaTarefa = "";
+
+    private List<Tarefa> tarefas = new List<Tarefa>();
+
+    void AdicionarNovaTarefa()
+    {
+        if (!string.IsNullOrWhiteSpace(NovaTarefa))
+        {
+            tarefas.Add(new Tarefa
+                {
+                    DataCriacao = DateTime.Now,
+                    Descricao = NovaTarefa,
+                    ID = Guid.NewGuid()
+            });
+            NovaTarefa = "";
+        }
+    }
+}
