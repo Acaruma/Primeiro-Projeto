@@ -7,8 +7,9 @@
 <table class="table">
 <thead>
     <tr>
-        <th>Data</th>
+        <th>Nome</th>
         <th>Descricao</th>
+        <th>Data</th>
         <th>Concluidas</th>
     </tr>
 </thead>
@@ -16,18 +17,22 @@
         @foreach (var item in tarefas)
         {
      <tr>
-        <td>@item.DataCriacao</td>
+         <td>@item.Nome</td>
         <td>@item.Descricao</td>
-        <td>@item.Concluida</td>
+        <td>@item.DataCriacao</td>
+        <td><input type="checkbox" @onclick="Cheked" />@teste.Concluida</td>
     </tr> 
         }
 
 </tbody>
 </table>
 
-@if (tarefas != null)
+@if(tarefas != null)
 {
-    <div class="form-group">
+
+    <div class="desc">
+        <label>Nome</label>
+        <input type="text" placeholder="seu nome" @bind="Nomee" />
         <label>Tarefa</label>
         <input type="Text" placeholder="Informe a tarefa" @bind="NovaTarefa" />
         <button class="btn btn-primary" @onclick="AdicionarNovaTarefa"> Registrar Tarefa</button>
@@ -41,28 +46,38 @@
 
     public class Tarefa {
 
+        public string Nome { get; set; }
         public Guid ID { get; set; }
-        public string Descricao { get; set; }   
-        public bool Concluida { get; set; }
-        public DateTime DataCriacao { get; set; }
+        public string Descricao { get; set; }
+        public string Concluida { get; set; } = "Nao";
+        public DateTime DataCriacao { get; set; }  
 
     }
-
+    Tarefa teste = new Tarefa();
     private string NovaTarefa = "";
-
+    private string Nomee;
     private List<Tarefa> tarefas = new List<Tarefa>();
-
-    void AdicionarNovaTarefa()
+    public void AdicionarNovaTarefa()
     {
-        if (!string.IsNullOrWhiteSpace(NovaTarefa))
+        if (!string.IsNullOrWhiteSpace(NovaTarefa) && !string.IsNullOrWhiteSpace(Nomee))
         {
-            tarefas.Add(new Tarefa
-                {
-                    DataCriacao = DateTime.Now,
-                    Descricao = NovaTarefa,
-                    ID = Guid.NewGuid()
-            });
-            NovaTarefa = "";
+            //tarefas.Add(new Tarefa(Nomee, DataCriacao, Descricao, ID));      
+
+            tarefas.Add(new Tarefa {
+                        Nome = Nomee,
+                        DataCriacao = DateTime.Now,
+                        Descricao = NovaTarefa,
+                        ID = Guid.NewGuid()
+
+                    });
+
         }
+        NovaTarefa = "";          
     }
+    public void Cheked()
+    {
+        teste.Concluida = teste.Concluida is "Nao" ? "Sim" : "Nao";
+    }
+
+   
 }
