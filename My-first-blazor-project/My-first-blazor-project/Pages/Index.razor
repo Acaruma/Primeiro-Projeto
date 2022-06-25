@@ -2,8 +2,16 @@
 
 <header>
     <nav><h2 id="nomeprojeto">Projeto #01</h2></nav>
-</header>
 
+<style>
+ .Sim {
+    color: white;
+    background-color:dimgrey;
+    text-decoration:line-through red;
+}
+</style>
+
+</header> 
 <table class="table">
 <thead>
     <tr>
@@ -16,14 +24,15 @@
 <tbody>
         @foreach (var item in tarefas)
         {
-     <tr>
+            
+     <tr class="@item.Concluida">
          <td>@item.Nome</td>
         <td>@item.Descricao</td>
         <td>@item.DataCriacao</td>
-        <td><input type="checkbox" @onclick="Cheked" />@teste.Concluida</td>
+        <td><input type="checkbox" @onclick="@item.Cheked" />@item.Concluida @item.DataConclusao</td>
     </tr> 
+        
         }
-
 </tbody>
 </table>
 
@@ -49,8 +58,27 @@
         public string Nome { get; set; }
         public Guid ID { get; set; }
         public string Descricao { get; set; }
-        public string Concluida { get; set; } = "Nao";
+        public string Concluida { get; set; }
         public DateTime DataCriacao { get; set; }  
+        public string DataConclusao { get; set; }
+        public DateTime aux { get; set; }
+
+        public void Cheked()
+        {
+            aux = DateTime.Now;
+            Concluida = Concluida is "Nao" ? "Sim" : "Nao";
+            if(Concluida is "Sim")
+            {
+                DataConclusao = " as: " + aux.ToString();
+            }
+            else
+            {
+                DataConclusao = "" ;
+            }
+
+            
+
+        }
 
     }
     Tarefa teste = new Tarefa();
@@ -64,20 +92,19 @@
             //tarefas.Add(new Tarefa(Nomee, DataCriacao, Descricao, ID));      
 
             tarefas.Add(new Tarefa {
-                        Nome = Nomee,
-                        DataCriacao = DateTime.Now,
-                        Descricao = NovaTarefa,
-                        ID = Guid.NewGuid()
-
-                    });
+                    Nome = Nomee,
+                    DataCriacao = DateTime.Now,
+                    Descricao = NovaTarefa,
+                    ID = Guid.NewGuid(),
+                    Concluida = "Nao",
+                    DataConclusao = ""
+        });
 
         }
         NovaTarefa = "";          
     }
-    public void Cheked()
-    {
-        teste.Concluida = teste.Concluida is "Nao" ? "Sim" : "Nao";
-    }
+
+
 
    
 }

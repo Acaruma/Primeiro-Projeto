@@ -4,5 +4,71 @@
 @{
     Layout = "_Layout";
 }
+<style>
+    .my-reconnect-modal > div{
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1000;
+        overflow: hidden;
+        background-color: #fff;
+        opacity: 0.8;
+        text-align: center;
+        font-weight: bold;
+    }
+    .components-reconnect-hide > div
+    {
+        display: none;
+    }
+
+    .components-reconnect-show > div
+    {
+        display: none;
+    }
+    .components-reconnect-show > .show
+    {
+        display: block;
+    }
+
+    .components-reconnect-failed > div
+    {
+        display: none;
+    }
+    .components-reconnect-failed > .failed
+    {
+        display: block;
+    }
+
+    .components-reconnect-rejected >div
+    {
+        display: none;
+    }
+    .components-reconnect-rejected > .rejected
+    {
+        display: block;
+    }
+</style>
 
 <component type="typeof(App)" render-mode="ServerPrerendered" />
+@* css a cima e html a baixo altera a mensagem de conexao com o servidor*@
+    <div id="components-reconnect-modal" class="my-reconnect-modal components-reconnect-hide">
+    <div class="show">
+        <h1>
+            Aaaaaa, poxa, voce perdeu a conexao com o nosso servidor.
+        </h1>
+        <h2>Estamos tentando reconectar...</h2>
+        <h2>Por favor verifique sua conexao com a internet...</h2>
+    </div>
+    <div class="failed">
+        <h2>
+            Falha ao tentar conectar.
+        </h2>
+    </div>
+    <div class="rejected">
+        <h2>
+            Conexao rejeitada, tente mais tarde.
+        </h2>
+    </div>
+</div>
