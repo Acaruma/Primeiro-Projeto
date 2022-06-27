@@ -1,17 +1,52 @@
-#nomeprojeto {
-    text-align: center;
-    color: aliceblue;
-    padding-bottom: 3%;
-    font-family: 'Courier New', Courier, monospace;
-    font-style: oblique;
-}
-
-header {
-    padding-top: 1%;
-    background-color: rgb(83, 83, 83);
-}
-
 body {
-    background-color: rgb(201, 201, 201);
+    background-color: rgb(126, 191, 245);
+}
+
+main{
+    margin-top: 20px;
+    color: black;
+}
+
+#containertable {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 14pt;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: left;
+}
+
+#tabela {
+    display: block;
+    background-color: rgb(255, 255, 255);
+    border-collapse: collapse;
+    max-height: 400px;
+    overflow: hidden;
+    text-align: left;
+    box-shadow: 5px 5px 0px rgb(0, 0, 0);
+}
+
+    #tabela th, #tabela td {
+        padding: 15px;
+        border: 1px solid rgb(0, 140, 255);
+        max-width: 650px;
+    }
+
+thead th:nth-child(1) {
+    width: 30%;
+}
+
+thead th:nth-child(2) {
+    width: 20%;
+}
+
+thead th:nth-child(3) {
+    width: 15%;
+}
+
+thead th:nth-child(4) {
+    width: 35%;
 }
 

@@ -1,18 +1,37 @@
 ﻿@page "/"
 
-<header>
-    <nav><h2 id="nomeprojeto">Projeto #01</h2></nav>
-
 <style>
  .Sim {
     color: white;
     background-color:dimgrey;
     text-decoration:line-through red;
+}       
+
+.bt{
+  background-color: rgb(0, 80, 185);
+  border: none;
+  color: white;
+  padding: 10px 22px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 13px;
+  margin: 4px 2px;
+  cursor: pointer;
 }
+
+#tarefainput{
+  font-size: 12px;
+  padding: 10px 22px;
+  display: inline-block;
+  font-size: 13px;
+  margin: 4px 2px;
+}
+
 </style>
 
-</header> 
-<table class="table">
+<div id="tablecontainer">
+<table id="tabela">
 <thead>
     <tr>
         <th>Nome</th>
@@ -35,16 +54,16 @@
         }
 </tbody>
 </table>
-
+</div>
 @if(tarefas != null)
 {
-
+    <hr />
     <div class="desc">
         <label>Nome</label>
-        <input type="text" placeholder="seu nome" @bind="Nomee" />
+        <input type="text" placeholder="seu nome" id="tarefainput" @bind="Nomee" />
         <label>Tarefa</label>
-        <input type="Text" placeholder="Informe a tarefa" @bind="NovaTarefa" />
-        <button class="btn btn-primary" @onclick="AdicionarNovaTarefa"> Registrar Tarefa</button>
+        <input type="Text" placeholder="Informe a tarefa" id="tarefainput" @bind="NovaTarefa" />
+        <button class="bt" @onclick="AdicionarNovaTarefa"> Registrar Tarefa</button>
 
     </div>
 }
